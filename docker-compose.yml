@@ -1,0 +1,48 @@
+services:
+    app:
+        container_name: maze_backend
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile
+        environment:
+            PORT: ${PORT}
+        ports:
+            - '1337:1337'
+        networks:
+            - network-maze
+
+    mysql-strapi:
+        container_name: maze_strapi_mysql
+        restart: always
+        image: mysql:8.0.36
+        environment:
+            MYSQL_ROOT_PASSWORD: pztMg1y02IY2ECwYUExWCwuwMIZNR8jyPItIsMNZSIoKgPyB6x
+            MYSQL_DATABASE: maze_strapi
+            MYSQL_USER: maze_strapi
+            MYSQL_PASSWORD: BqPHKVCEkrn9NO1bl5TdO5r8gjrf36VAERfmg92I3ksCIkmh3a
+        volumes:
+            - mysql:/var/lib/mysql
+            - ./temp:/temp
+            - ./maze-strapi.sql:/docker-entrypoint-initdb.d/a.sql
+            - ./temp/atlantis.sql:/docker-entrypoint-initdb.d/b.sql
+            - ./.my.cnf:/.my.cnf
+        # https://docs.docker.com/engine/network/packet-filtering-firewalls/#setting-the-default-bind-address-for-containers
+        # https://github.com/compose-spec/compose-spec/blob/main/spec.md#ports
+        ports:
+            - '127.0.0.1:3304:3304'
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+            interval: 5s
+            timeout: 5s
+            retries: 10
+        networks:
+            - network-maze
+
+networks:
+    network-maze:
+        driver: bridge
+        external: true
+
+volumes:
+    mysql:
