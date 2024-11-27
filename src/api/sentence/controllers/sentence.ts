@@ -66,7 +66,6 @@ export default factories.createCoreController('api::sentence.sentence', ({ strap
                 return { status: 404, data: 'user dont exist' };
             }
 
-
             const invalidList = await strapi.documents('api::invalid-list.invalid-list').findMany({
                 status: 'published',
                 filters: {
