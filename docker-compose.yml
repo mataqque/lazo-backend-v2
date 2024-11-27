@@ -24,8 +24,8 @@ services:
         volumes:
             - mysql:/var/lib/mysql
             - ./temp:/temp
-            - ./lazo-strapi.sql:/docker-entrypoint-initdb.d/a.sql
-            - ./temp/atlantis.sql:/docker-entrypoint-initdb.d/b.sql
+            - ./init.sql:/docker-entrypoint-initdb.d/a.sql
+            - ./temp/lazo-strapi.sql:/docker-entrypoint-initdb.d/b.sql
             - ./.my.cnf:/.my.cnf
         # https://docs.docker.com/engine/network/packet-filtering-firewalls/#setting-the-default-bind-address-for-containers
         # https://github.com/compose-spec/compose-spec/blob/main/spec.md#ports
