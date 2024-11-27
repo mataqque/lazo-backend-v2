@@ -65,12 +65,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "sentences": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::sentence.sentence",
-      "mappedBy": "user"
-    },
     "cel": {
       "type": "string",
       "required": true

@@ -1,9 +1,8 @@
-import { TdefaultRouter } from "../api/sentence/routes/sentence";
 import { Route, Router } from '@strapi/types/dist/core/core-api/router'
 
 type CustomRouterFunction = (defaultRouter: Router, extraRoutes: any) => Router;
 
-export const customRouter: CustomRouterFunction = (innerRouter, extraRoutes) => {
+export const customRouter: CustomRouterFunction = (innerRouter, extraRoutes = []) => {
 
     let routes: typeof innerRouter.routes;
 

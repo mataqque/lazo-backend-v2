@@ -1,1 +1,1 @@
-docker exec maze_strapi_mysql bash -c "mysqldump -u root -ppztMg1y02IY2ECwYUExWCwuwMIZNR8jyPItIsMNZSIoKgPyB6x maze_strapi > /temp/maze-strapi.sql"
+docker exec lazo_strapi_mysql bash -c "mysqldump -u root -ppztMg1y02IY2ECwYUExWCwuwMIZNR8jyPItIsMNZSIoKgPyB6x lazo_strapi > /temp/lazo-strapi.sql"

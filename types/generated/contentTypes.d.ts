@@ -1,54 +1,5 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface ApiInvalidListInvalidList extends Struct.CollectionTypeSchema {
-	collectionName: 'invalid_lists';
-	info: {
-		singularName: 'invalid-list';
-		pluralName: 'invalid-lists';
-		displayName: 'invalidList';
-		description: '';
-	};
-	options: {
-		draftAndPublish: true;
-	};
-	attributes: {
-		list: Schema.Attribute.JSON;
-		user: Schema.Attribute.Relation<'oneToOne', 'plugin::users-permissions.user'>;
-		createdAt: Schema.Attribute.DateTime;
-		updatedAt: Schema.Attribute.DateTime;
-		publishedAt: Schema.Attribute.DateTime;
-		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
-		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
-		locale: Schema.Attribute.String;
-		localizations: Schema.Attribute.Relation<'oneToMany', 'api::invalid-list.invalid-list'>;
-	};
-}
-
-export interface ApiSentenceSentence extends Struct.CollectionTypeSchema {
-	collectionName: 'sentences';
-	info: {
-		singularName: 'sentence';
-		pluralName: 'sentences';
-		displayName: 'sentence';
-		description: '';
-	};
-	options: {
-		draftAndPublish: true;
-	};
-	attributes: {
-		spanish: Schema.Attribute.String;
-		english: Schema.Attribute.String;
-		user: Schema.Attribute.Relation<'manyToOne', 'plugin::users-permissions.user'>;
-		createdAt: Schema.Attribute.DateTime;
-		updatedAt: Schema.Attribute.DateTime;
-		publishedAt: Schema.Attribute.DateTime;
-		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
-		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
-		locale: Schema.Attribute.String;
-		localizations: Schema.Attribute.Relation<'oneToMany', 'api::sentence.sentence'>;
-	};
-}
-
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
 	collectionName: 'files';
 	info: {
@@ -431,7 +382,6 @@ export interface PluginUsersPermissionsUser extends Struct.CollectionTypeSchema 
 		confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
 		blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
 		role: Schema.Attribute.Relation<'manyToOne', 'plugin::users-permissions.role'>;
-		sentences: Schema.Attribute.Relation<'oneToMany', 'api::sentence.sentence'>;
 		cel: Schema.Attribute.String & Schema.Attribute.Required;
 		interval: Schema.Attribute.String;
 		createdAt: Schema.Attribute.DateTime;
@@ -772,8 +722,6 @@ export interface AdminTransferTokenPermission extends Struct.CollectionTypeSchem
 declare module '@strapi/strapi' {
 	export module Public {
 		export interface ContentTypeSchemas {
-			'api::invalid-list.invalid-list': ApiInvalidListInvalidList;
-			'api::sentence.sentence': ApiSentenceSentence;
 			'plugin::upload.file': PluginUploadFile;
 			'plugin::upload.folder': PluginUploadFolder;
 			'plugin::i18n.locale': PluginI18NLocale;
