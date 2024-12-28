@@ -71,6 +71,12 @@
     },
     "interval": {
       "type": "string"
+    },
+    "sell_products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sell-product.sell-product",
+      "mappedBy": "users_permissions_user"
     }
   }
 }

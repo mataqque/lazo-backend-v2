@@ -17,7 +17,7 @@
     },
     "banner": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images",
@@ -34,6 +34,15 @@
       "relation": "manyToOne",
       "target": "api::product.product",
       "inversedBy": "categories"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
     }
   }
 }

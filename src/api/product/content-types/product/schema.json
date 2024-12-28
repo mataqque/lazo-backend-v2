@@ -4,7 +4,8 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "Product"
+    "displayName": "Product",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,20 +20,18 @@
       "targetField": "name"
     },
     "media": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "price": {
       "type": "decimal"
-    },
-    "description": {
-      "type": "blocks"
     },
     "quantity": {
       "type": "integer"
@@ -48,6 +47,9 @@
     },
     "like": {
       "type": "integer"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

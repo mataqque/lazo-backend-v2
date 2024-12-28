@@ -1,85 +1,5 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
-	collectionName: 'categories';
-	info: {
-		singularName: 'category';
-		pluralName: 'categories';
-		displayName: 'category';
-		description: '';
-	};
-	options: {
-		draftAndPublish: true;
-	};
-	attributes: {
-		name: Schema.Attribute.String;
-		banner: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-		description: Schema.Attribute.Text;
-		product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
-		createdAt: Schema.Attribute.DateTime;
-		updatedAt: Schema.Attribute.DateTime;
-		publishedAt: Schema.Attribute.DateTime;
-		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
-		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
-		locale: Schema.Attribute.String;
-		localizations: Schema.Attribute.Relation<'oneToMany', 'api::category.category'>;
-	};
-}
-
-export interface ApiListIpListIp extends Struct.CollectionTypeSchema {
-	collectionName: 'list_ips';
-	info: {
-		singularName: 'list-ip';
-		pluralName: 'list-ips';
-		displayName: 'List ip';
-	};
-	options: {
-		draftAndPublish: true;
-	};
-	attributes: {
-		ip: Schema.Attribute.String;
-		blocked: Schema.Attribute.String;
-		attemps: Schema.Attribute.String;
-		createdAt: Schema.Attribute.DateTime;
-		updatedAt: Schema.Attribute.DateTime;
-		publishedAt: Schema.Attribute.DateTime;
-		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
-		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
-		locale: Schema.Attribute.String;
-		localizations: Schema.Attribute.Relation<'oneToMany', 'api::list-ip.list-ip'>;
-	};
-}
-
-export interface ApiProductProduct extends Struct.CollectionTypeSchema {
-	collectionName: 'products';
-	info: {
-		singularName: 'product';
-		pluralName: 'products';
-		displayName: 'Product';
-	};
-	options: {
-		draftAndPublish: true;
-	};
-	attributes: {
-		name: Schema.Attribute.String;
-		slug: Schema.Attribute.UID<'name'>;
-		media: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-		price: Schema.Attribute.Decimal;
-		description: Schema.Attribute.Blocks;
-		quantity: Schema.Attribute.Integer;
-		discount: Schema.Attribute.Integer;
-		categories: Schema.Attribute.Relation<'oneToMany', 'api::category.category'>;
-		like: Schema.Attribute.Integer;
-		createdAt: Schema.Attribute.DateTime;
-		updatedAt: Schema.Attribute.DateTime;
-		publishedAt: Schema.Attribute.DateTime;
-		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
-		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
-		locale: Schema.Attribute.String;
-		localizations: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
-	};
-}
-
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
 	collectionName: 'files';
 	info: {
@@ -464,6 +384,7 @@ export interface PluginUsersPermissionsUser extends Struct.CollectionTypeSchema 
 		role: Schema.Attribute.Relation<'manyToOne', 'plugin::users-permissions.role'>;
 		cel: Schema.Attribute.String & Schema.Attribute.Required;
 		interval: Schema.Attribute.String;
+		sell_products: Schema.Attribute.Relation<'oneToMany', 'api::sell-product.sell-product'>;
 		createdAt: Schema.Attribute.DateTime;
 		updatedAt: Schema.Attribute.DateTime;
 		publishedAt: Schema.Attribute.DateTime;
@@ -471,6 +392,120 @@ export interface PluginUsersPermissionsUser extends Struct.CollectionTypeSchema 
 		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
 		locale: Schema.Attribute.String;
 		localizations: Schema.Attribute.Relation<'oneToMany', 'plugin::users-permissions.user'>;
+	};
+}
+
+export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
+	collectionName: 'categories';
+	info: {
+		singularName: 'category';
+		pluralName: 'categories';
+		displayName: 'category';
+		description: '';
+	};
+	options: {
+		draftAndPublish: true;
+	};
+	attributes: {
+		name: Schema.Attribute.String;
+		banner: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+		description: Schema.Attribute.Text;
+		product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
+		slug: Schema.Attribute.UID<'name'>;
+		category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
+		createdAt: Schema.Attribute.DateTime;
+		updatedAt: Schema.Attribute.DateTime;
+		publishedAt: Schema.Attribute.DateTime;
+		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+		locale: Schema.Attribute.String;
+		localizations: Schema.Attribute.Relation<'oneToMany', 'api::category.category'>;
+	};
+}
+
+export interface ApiListIpListIp extends Struct.CollectionTypeSchema {
+	collectionName: 'list_ips';
+	info: {
+		singularName: 'list-ip';
+		pluralName: 'list-ips';
+		displayName: 'List ip';
+	};
+	options: {
+		draftAndPublish: true;
+	};
+	attributes: {
+		ip: Schema.Attribute.String;
+		blocked: Schema.Attribute.String;
+		attemps: Schema.Attribute.String;
+		createdAt: Schema.Attribute.DateTime;
+		updatedAt: Schema.Attribute.DateTime;
+		publishedAt: Schema.Attribute.DateTime;
+		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+		locale: Schema.Attribute.String;
+		localizations: Schema.Attribute.Relation<'oneToMany', 'api::list-ip.list-ip'>;
+	};
+}
+
+export interface ApiProductProduct extends Struct.CollectionTypeSchema {
+	collectionName: 'products';
+	info: {
+		singularName: 'product';
+		pluralName: 'products';
+		displayName: 'Product';
+		description: '';
+	};
+	options: {
+		draftAndPublish: true;
+	};
+	attributes: {
+		name: Schema.Attribute.String;
+		slug: Schema.Attribute.UID<'name'>;
+		media: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+		price: Schema.Attribute.Decimal;
+		quantity: Schema.Attribute.Integer;
+		discount: Schema.Attribute.Integer;
+		categories: Schema.Attribute.Relation<'oneToMany', 'api::category.category'>;
+		like: Schema.Attribute.Integer;
+		description: Schema.Attribute.Text;
+		createdAt: Schema.Attribute.DateTime;
+		updatedAt: Schema.Attribute.DateTime;
+		publishedAt: Schema.Attribute.DateTime;
+		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+		locale: Schema.Attribute.String;
+		localizations: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
+	};
+}
+
+export interface ApiSellProductSellProduct extends Struct.CollectionTypeSchema {
+	collectionName: 'sell_products';
+	info: {
+		singularName: 'sell-product';
+		pluralName: 'sell-products';
+		displayName: 'sellProduct';
+	};
+	options: {
+		draftAndPublish: true;
+	};
+	attributes: {
+		totalSell: Schema.Attribute.Decimal;
+		products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
+		methodPaid: Schema.Attribute.String;
+		selled: Schema.Attribute.Boolean & Schema.Attribute.Required & Schema.Attribute.DefaultTo<false>;
+		address: Schema.Attribute.String;
+		adicionaldata: Schema.Attribute.Blocks;
+		contact: Schema.Attribute.String;
+		date_delivery: Schema.Attribute.String;
+		hour_delivery: Schema.Attribute.String;
+		users_permissions_user: Schema.Attribute.Relation<'manyToOne', 'plugin::users-permissions.user'>;
+		createdAt: Schema.Attribute.DateTime;
+		updatedAt: Schema.Attribute.DateTime;
+		publishedAt: Schema.Attribute.DateTime;
+		createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+		updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+		locale: Schema.Attribute.String;
+		localizations: Schema.Attribute.Relation<'oneToMany', 'api::sell-product.sell-product'>;
 	};
 }
 
@@ -802,9 +837,6 @@ export interface AdminTransferTokenPermission extends Struct.CollectionTypeSchem
 declare module '@strapi/strapi' {
 	export module Public {
 		export interface ContentTypeSchemas {
-			'api::category.category': ApiCategoryCategory;
-			'api::list-ip.list-ip': ApiListIpListIp;
-			'api::product.product': ApiProductProduct;
 			'plugin::upload.file': PluginUploadFile;
 			'plugin::upload.folder': PluginUploadFolder;
 			'plugin::i18n.locale': PluginI18NLocale;
@@ -815,6 +847,10 @@ declare module '@strapi/strapi' {
 			'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
 			'plugin::users-permissions.role': PluginUsersPermissionsRole;
 			'plugin::users-permissions.user': PluginUsersPermissionsUser;
+			'api::category.category': ApiCategoryCategory;
+			'api::list-ip.list-ip': ApiListIpListIp;
+			'api::product.product': ApiProductProduct;
+			'api::sell-product.sell-product': ApiSellProductSellProduct;
 			'admin::permission': AdminPermission;
 			'admin::user': AdminUser;
 			'admin::role': AdminRole;
