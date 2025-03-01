@@ -16,10 +16,6 @@ RUN yarn global add node-gyp
 RUN yarn install --frozen-lockfile
 ENV PATH /app/node_modules/.bin:$PATH
 
-
 WORKDIR /app
 
-
 EXPOSE 1337
-
-
